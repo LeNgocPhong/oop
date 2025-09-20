@@ -1,4 +1,4 @@
-public class Intruduction {
+public class Introduction {
     public static void main(String[] args) {
         System.out.println("Lê Ngọc Phong"
                 + '\t' + "24021593"
