@@ -12,7 +12,23 @@ public class StringCode {
 	 * @return max run length
 	 */
 	public static int maxRun(String str) {
-		return 0; // YOUR CODE HERE
+		 // YOUR CODE HERE
+        if (str == null || str.isEmpty()) return 0;
+
+        int max = 1;
+        int current = 1;
+
+        for (int i = 1; i < str.length(); i++) {
+            if (str.charAt(i) == str.charAt(i - 1)) {
+                current++;
+                if (current > max) {
+                    max = current;
+                }
+            } else {
+                current = 1;
+            }
+        }
+        return max;
 	}
 
 	
@@ -24,7 +40,28 @@ public class StringCode {
 	 * @return blown up string
 	 */
 	public static String blowup(String str) {
-		return null; // YOUR CODE HERE
+        // YOUR CODE HERE
+        if (str == null || str.isEmpty()) return "";
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+
+            if (Character.isDigit(c)) {
+                int count = c - '0';
+                if (i + 1 < str.length()) {
+                    char next = str.charAt(i + 1);
+                    for (int j = 0; j < count; j++) {
+                        sb.append(next);
+                    }
+                }
+            } else {
+                sb.append(c);
+            }
+        }
+
+        return sb.toString();
 	}
 	
 	/**
@@ -34,6 +71,22 @@ public class StringCode {
 	 * Compute this in linear time using a HashSet. Len will be 1 or more.
 	 */
 	public static boolean stringIntersect(String a, String b, int len) {
-		return false; // YOUR CODE HERE
+		// YOUR CODE HERE
+        if (a == null || b == null || len <= 0) return false;
+        if (len > a.length() || len > b.length()) return false;
+
+        Set<String> seen = new HashSet<>();
+
+        for (int i = 0; i <= a.length() - len; i++) {
+            seen.add(a.substring(i, i + len));
+        }
+
+        for (int i = 0; i <= b.length() - len; i++) {
+            if (seen.contains(b.substring(i, i + len))) {
+                return true;
+            }
+        }
+
+        return false;
 	}
 }
